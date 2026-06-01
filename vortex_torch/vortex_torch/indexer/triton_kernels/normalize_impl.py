@@ -1,0 +1,119 @@
+import torch
+import triton
+import triton.language as tl
+from ..context import Context
+
+@triton.jit
+def normalize_inplace_r_kernel(
+x, 
+indptr,
+bos: tl.constexpr,
+eos: tl.constexpr,
+topk_val: tl.constexpr,
+x_D0: tl.constexpr,
+x_D1: tl.constexpr,
+BLOCK_P: tl.constexpr = 256,
+eps: tl.constexpr = 1e-12,
+):
+    pid = tl.program_id(0)
+
+    start = tl.load(indptr + pid)
+    end   = tl.load(indptr + pid + 1)
+    num_pages_this_seq = end - start
+
+    threshold: tl.constexpr = bos + eos + topk_val
+    if num_pages_this_seq <= threshold:
+        return
+
+    num_pages_to_compute = num_pages_this_seq - bos - eos
+    if num_pages_to_compute <= 0:
+        return
+
+    base_ptr = x + (start + bos) * (x_D0 * x_D1)
+
+    d0_idx = tl.arange(0, x_D0)
+    d1_idx = tl.arange(0, x_D1)
+    p_idx  = tl.arange(0, BLOCK_P)
+
+    # --- accumulation of norm ---
+    square_norm = tl.zeros((x_D0, x_D1), dtype=tl.float32)
+    eps = tl.full((x_D0, x_D1), value=eps, dtype=tl.float32)
+    for p in range(0, num_pages_to_compute, BLOCK_P):
+        kp = tl.minimum(BLOCK_P, num_pages_to_compute - p)
+        p_mask = p_idx < kp
+
+        offs = (
+            (p + p_idx)[:, None, None] * (x_D0 * x_D1)
+            + d0_idx[None, :, None] * x_D1
+            + d1_idx[None, None, :]
+        ).to(tl.int32)
+
+        mask = p_mask[:, None, None]
+        slab = tl.load(base_ptr + offs, mask=mask, other=0.0).to(tl.float32)
+        square_norm_c = tl.sum(slab * slab, axis=0)
+        square_norm =  square_norm + square_norm_c
+
+    norm = tl.maximum(tl.sqrt(square_norm), eps)
+    # --- Normalize and store ---
+    for p in range(0, num_pages_to_compute, BLOCK_P):
+        kp = tl.minimum(BLOCK_P, num_pages_to_compute - p)
+        p_mask = p_idx < kp
+
+        offs = (
+            (p + p_idx)[:, None, None] * (x_D0 * x_D1)
+            + d0_idx[None, :, None] * x_D1
+            + d1_idx[None, None, :]
+        ).to(tl.int32)
+
+        mask = p_mask[:, None, None]
+        slab = tl.load(base_ptr + offs, mask=mask, other=0.0).to(tl.float32)
+        slab = slab / norm
+        slab = slab.to(tl.bfloat16)
+        tl.store(base_ptr + offs, slab, mask=mask)
+
+    
+
+
+def normalize_inplace_r(
+x: torch.Tensor,
+dim: int,
+ctx: Context
+):  
+    
+    eff_batch_size = ctx.batch_size * ctx.num_kv_heads
+   
+    normalize_inplace_r_kernel[(eff_batch_size,)](
+        x,
+        ctx.dense_kv_indptr,
+        ctx.page_reserved_bos,
+        ctx.page_reserved_eos,
+        ctx.topk_val,
+        x.shape[-2], 
+        x.shape[-1], 
+        num_warps=4, 
+        num_stages=1
+    )
+    
+
+
+def _normalize_inplace_r(
+x: torch.Tensor,
+dim: int,
+indptr: torch.Tensor,
+page_reserved_bos: int, 
+page_reserved_eos: int,
+topk_val: int,
+batch_size: int
+):  
+       
+    normalize_inplace_r_kernel[(batch_size,)](
+        x,
+        indptr,
+        page_reserved_bos,
+        page_reserved_eos,
+        topk_val,
+        x.shape[-2], 
+        x.shape[-1], 
+        num_warps=4, 
+        num_stages=1
+    )
