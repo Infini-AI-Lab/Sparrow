@@ -189,12 +189,8 @@ class RolloutConfig(BaseConfig):
     force_select_repeat: Optional[int] = None
     force_select_repeat_use_acceptance_rate: bool = False 
     
-    enable_sparse_lora: bool = False 
-    
-    debugging_gridsweep: bool = False 
-    debugging_acceptancesparsityscatter: bool = False 
-    debugging_arrmfilesuffix: Optional[str] = None 
-    
-    exception_save_steps: Optional[int] = None 
+    enable_sparse_lora: bool = False
+
+    exception_save_steps: Optional[int] = None
     
     val_dense_only: bool = False 

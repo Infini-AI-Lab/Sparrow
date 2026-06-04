@@ -198,13 +198,9 @@ rollout_model_update_every_nsteps: 1
 dense_filtering_overload: False 
 
 force_select_repeat: null 
-force_select_repeat_use_acceptance_rate: False 
+force_select_repeat_use_acceptance_rate: False
 
-debugging_gridsweep: False 
-debugging_acceptancesparsityscatter: False 
-debugging_arrmfilesuffix: null 
-
-enable_fast_toplogprobs_path: False 
+enable_fast_toplogprobs_path: False
 
 exception_save_steps: null 
 

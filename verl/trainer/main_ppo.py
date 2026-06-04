@@ -112,11 +112,7 @@ class TaskRunner:
         from verl.single_controller.ray import RayWorkerGroup
 
         if config.actor_rollout_ref.actor.strategy in {"fsdp", "fsdp2"}: 
-            if config.actor_rollout_ref.actor.debugging_dense_teacher: 
-                from verl.workers.fsdpsparse_workers import ActorRolloutRefWorker, AsyncActorRolloutRefWorker 
-            elif config.actor_rollout_ref.rollout.enable_sparse_lora: 
-                from verl.workers.fsdp_workerslora import ActorRolloutRefWorker, AsyncActorRolloutRefWorker 
-            elif config.actor_rollout_ref.rollout.cuda_graph_turnon: 
+            if config.actor_rollout_ref.rollout.cuda_graph_turnon: 
                 from verl.workers.fsdp_workers_twinengine import ActorRolloutRefWorker, AsyncActorRolloutRefWorker 
             else: 
                 from verl.workers.fsdp_workers import ActorRolloutRefWorker, AsyncActorRolloutRefWorker 
