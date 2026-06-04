@@ -136,3 +136,24 @@ Notice that the key block are as follows
 Currently, we only support `flashinfer` for actual attention computation (`vortex` is for landmark and Top-K). Please make sure to set `vortex_module_name` to `block_sparse_attention`. You can adjust `vortex_schedule_policy` based on your model and your will. To add new schedule, you need to modify `vortex_torch/vortex_torch/indexer/utils_sglang.py`. 
 
 To disable sparse rollout and run dense rollout, you can override the above by `actor_rollout_ref.rollout.sparse_rollout=False`. 
+
+Similarly, for code, 
+```
+cd examples/code-r1 
+bash -x example_code.sh 
+``` 
+
+An important thing is that if you successfully installed `firejail`, you need to turn the following on: `trainer.check_mode=firejail`, otherwise, on: `trainer.check_mode=soft`. 
+
+--- 
+##### Cite US
+If you find the resources provided helpful, please consider citing us 
+
+```
+@misc{chen2026tamingsparserollout,
+  title  = {Taming Sparse Rollout: Understanding Stability in RL for Large Language Models with Sparse Attention},
+  author = {Zhou, Yang and Sadhukhan, Ranajoy and Sun, Zhaofeng and Chen, Zhuoming and Kundu, Souvik and Dingliwal, Saket and Jayanthi, Sai Muralidhar and Galstyan, Aram and Zheng, Haizhong and Chen, Beidi},
+  year   = {2026},
+  note   = {arXiv placeholder}
+}
+```
