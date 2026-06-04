@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <sup>1</sup>Carnegie Mellon University &nbsp;&nbsp; <sup>2</sup>Independent Researcher &nbsp;&nbsp; <sup>3</sup>Intel &nbsp;&nbsp; <sup>4</sup>Amazon
+  <sup>1</sup>Carnegie Mellon University &nbsp;&nbsp; <sup>2</sup>Independent Researcher &nbsp;&nbsp; <sup>3</sup>Intel &nbsp;&nbsp; <sup>4</sup>Amazon AGI 
 </p>
 
 <p align="center">
