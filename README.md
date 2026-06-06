@@ -20,7 +20,7 @@ Sparrow: <u>Spar</u>se <u>Roll</u>out for Stable and Efficient Long-context RL o
 ---
 
 <p align="center">
-  <img src="figure1.png" alt="Figure 1" width="100%">
+  <img src="assets/figure1.png" alt="Figure 1" width="100%">
 </p>
 
 Despite being powerful, **reinforcement learning with verifiable rewards (RLVR)** induces **extremely long
