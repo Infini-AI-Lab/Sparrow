@@ -1,4 +1,7 @@
-<h1 align="center">Taming Sparse Rollout: Understanding Stability in RL for Large Language Models with Sparse Attention</h1>
+<!-- <h1 align="center">Sparrow: \underline{Spar}se \underline{Roll}out for Stable and Efficient Long-context RL of Large Language Models</h1>  --> 
+<h1 align="center">
+Sparrow: <u>Spar</u>se <u>Roll</u>out for Stable and Efficient Long-context RL of Large Language Models
+</h1>
 
 <p align="center">
   <b>Yang Zhou</b><sup>1</sup>, <b>Ranajoy Sadhukhan</b><sup>1</sup>, <b>Zhaofeng Sun</b><sup>2</sup>, <b>Zhuoming Chen</b><sup>1</sup>, <b>Souvik Kundu</b><sup>3</sup>, <b>Saket Dingliwal</b><sup>4</sup>, <b>Sai Muralidhar Jayanthi</b><sup>4</sup>, <b>Aram Galstyan</b><sup>4</sup>, <b>Haizhong Zheng</b><sup>1</sup>, <b>Beidi Chen</b><sup>1</sup>
