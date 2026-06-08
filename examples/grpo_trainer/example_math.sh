@@ -1,5 +1,5 @@
 export PYTHONPATH=${pwd}/vortex_torch:$PYTHONPATH 
-export src_dir=${pwd} # TamedSparsity root dir 
+export src_dir=${pwd} # Sparrow root dir 
 
 set -x 
 export VLLM_ALLOW_INSECURE_SERIALIZATION=1 
@@ -19,8 +19,8 @@ TP_SIZE=1
 NNODES=1 
 N_GPUS_PER_NODE=8 
 
-localdirr=/${src_dir}/examples/amyaml_legacy/data 
-logpath=/${src_dir}/ckpts 
+localdirr=${src_dir}/examples/amyaml_legacy/data 
+logpath=${src_dir}/ckpts 
 # logpath=/workspace/ckpts 
 
 
