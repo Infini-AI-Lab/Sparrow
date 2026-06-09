@@ -172,10 +172,13 @@ An important thing is that if you successfully installed `firejail`, you need to
 If you find the resources provided helpful, please consider citing us 
 
 ```
-@misc{chen2026tamingsparserollout,
-  title  = {Taming Sparse Rollout: Understanding Stability in RL for Large Language Models with Sparse Attention},
-  author = {Zhou, Yang and Sadhukhan, Ranajoy and Sun, Zhaofeng and Chen, Zhuoming and Kundu, Souvik and Dingliwal, Saket and Jayanthi, Sai Muralidhar and Galstyan, Aram and Zheng, Haizhong and Chen, Beidi},
-  year   = {2026},
-  note   = {arXiv placeholder}
+@misc{zhou2026sparrowsparserolloutstable,
+      title={Sparrow: Sparse Rollout for Stable and Efficient Long-context RL of Large Language Models}, 
+      author={Yang Zhou and Ranajoy Sadhukhan and Zhaofeng Sun and Zhuoming Chen and Souvik Kundu and Saket Dingliwal and Sai Muralidhar Jayanthi and Aram Galstyan and Haizhong Zheng and Beidi Chen},
+      year={2026},
+      eprint={2606.08446},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2606.08446}, 
 }
 ```
