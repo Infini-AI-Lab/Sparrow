@@ -10,14 +10,14 @@ export PYTHONPATH="$PROJECT_DIR/vortex_torch:$PYTHONPATH"
 export VLLM_ALLOW_INSECURE_SERIALIZATION=1
 export RAY_TASK_ERROR_VERBOSE=1
 
-export TMPDIR="${TMPDIR:-/home/xun/yangzho6/tmp}"
+export TMPDIR="${TMPDIR:-${PROJECT_DIR}/tmp}"
 mkdir -p "$TMPDIR"
 export TORCH_EXTENSIONS_DIR="${TMPDIR}/torch_extensions_${USER:-user}_${RANDOM}"
 mkdir -p "$TORCH_EXTENSIONS_DIR"
 echo "TORCH_EXTENSIONS_DIR=$TORCH_EXTENSIONS_DIR"
 
 export TORCH_COMPILE_DISABLE=1
-export REWARD_VALIDATE_WORKERS=32 
+export REWARD_VALIDATE_WORKERS=32 # adjust based on your CPU 
 ulimit -n 65535
 
 project_name="${PROJECT_NAME:-code_r1_sglang}"
@@ -28,7 +28,7 @@ TP_SIZE="${TP_SIZE:-1}"
 NNODES="${NNODES:-1}"
 N_GPUS_PER_NODE=8 
 
-localdirr="/home/xun/yangzho6/distilldynamcode/examples/amyaml_legacy/data" 
+localdirr="${PROJECT_DIR}/data" 
 logpath="$PROJECT_DIR/models"
 
 code_train_path="$localdirr/code-r1-21k-taco-codecontests/train.parquet"

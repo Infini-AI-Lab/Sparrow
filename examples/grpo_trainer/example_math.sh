@@ -32,9 +32,7 @@ gsminfinitop2to24_train_path=$localdirr/gsminfinitop2to24/train.parquet
 
 aime2024_test_path=$localdirr/aime2024/test.parquet
 aime2025_test_path=$localdirr/aime2025/test.parquet 
-aime2024x4_test_path=$localdirr/aime2024x4/test.parquet
-aime2025x4_test_path=$localdirr/aime2025x4/test.parquet 
-aime2026x4_test_path=$localdirr/aime2026x4/test.parquet 
+aime2026_test_path=$localdirr/aime2026/test.parquet 
 math500_test_path=$localdirr/math500/test.parquet 
 gsm8k_test_path=$localdirr/gsm8k/test.parquet 
 amc_test_path=$localdirr/amc/test.parquet
@@ -44,7 +42,7 @@ amc24_test_path=$localdirr/amc24/test.parquet
 gsminfinitop2to24_test_path=$localdirr/gsminfinitop2to24/test.parquet 
 
 train_files="['$polaris_combined_train_path']" 
-test_files="['$aime2025x4_test_path']" 
+test_files="['$aime2025_test_path']" 
 
 mkdir -p data-log/$project_name 
 
@@ -81,7 +79,7 @@ python3 -u -m verl.trainer.main_ppo \
     actor_rollout_ref.ref.bsa_kwargs_nsa_block_counts=32 \
     actor_rollout_ref.ref.bsa_kwargs_window_offset=0 \
     actor_rollout_ref.rollout.enable_fast_toplogprobs_path=True \
-    actor_rollout_ref.rollout.exception_save_steps=\'2,3\' \
+    actor_rollout_ref.rollout.exception_save_steps=\'150,300\' \
     actor_rollout_ref.rollout.log_prob_micro_batch_size_per_gpu=2 \
     actor_rollout_ref.rollout.tensor_model_parallel_size=$TP_SIZE \
     actor_rollout_ref.rollout.name=sglang \
@@ -105,6 +103,8 @@ python3 -u -m verl.trainer.main_ppo \
     +actor_rollout_ref.rollout.engine_kwargs.sglang.disable_cuda_graph=True \
     +actor_rollout_ref.rollout.engine_kwargs.sglang.vortex_module_name='block_sparse_attention' \
     +actor_rollout_ref.rollout.engine_kwargs.sglang.disable_overlap_schedule=True \
+    +actor_rollout_ref.rollout.engine_kwargs.sglang.vortex_topk_val=45 \
+    +actor_rollout_ref.rollout.engine_kwargs.sglang.page_size=16 \
     +actor_rollout_ref.rollout.engine_kwargs.sglang.enable_vortex_sparsity=True \
     +actor_rollout_ref.rollout.engine_kwargs.sglang.vortex_block_reserved_bos=1 \
     +actor_rollout_ref.rollout.engine_kwargs.sglang.vortex_block_reserved_eos=2 \
@@ -115,7 +115,7 @@ python3 -u -m verl.trainer.main_ppo \
     actor_rollout_ref.rollout.calculate_log_probs=True \
     actor_rollout_ref.rollout.free_cache_engine=True \
     actor_rollout_ref.rollout.log_probs_to_keep=0 \
-    actor_rollout_ref.rollout.val_kwargs.n=1 \
+    actor_rollout_ref.rollout.val_kwargs.n=16 \
     actor_rollout_ref.rollout.val_kwargs.do_sample=True \
     actor_rollout_ref.rollout.val_kwargs.top_p=0.7 \
     actor_rollout_ref.rollout.val_kwargs.temperature=1 \
