@@ -12,4 +12,3 @@ pip install -e . --no-build-isolation --no-deps
 cd .. 
 pip install -e . 
 pip install flash-attn --no-build-isolation 
-pip install math-verify 

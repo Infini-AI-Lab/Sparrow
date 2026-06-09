@@ -19,7 +19,7 @@ TP_SIZE=1
 NNODES=1 
 N_GPUS_PER_NODE=8 
 
-localdirr=${src_dir}/examples/amyaml_legacy/data 
+localdirr=${src_dir}/examples/data_preprocess/data 
 logpath=${src_dir}/ckpts 
 # logpath=/workspace/ckpts 
 
