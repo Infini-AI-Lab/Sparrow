@@ -12,7 +12,7 @@ Sparrow: <u>Spar</u>se <u>Roll</u>out for Stable and Efficient Long-context RL o
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/XXXX.XXXXX"><img src="https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg" alt="arXiv"></a>
+  <a href="https://arxiv.org/abs/2606.08446"><img src="https://img.shields.io/badge/arXiv-2606.08446-b31b1b.svg" alt="arXiv"></a>
   &nbsp;
   <a href="https://infini-ai-lab.github.io/tamed_sparsity_release/"><img src="https://img.shields.io/badge/Website-Project%20Page-blue.svg" alt="Website"></a>
 </p>
