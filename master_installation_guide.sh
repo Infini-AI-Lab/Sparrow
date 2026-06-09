@@ -11,3 +11,4 @@ pip install -e . --no-build-isolation --no-deps
 # third install verl 
 cd .. 
 pip install -e . 
+pip install flash-attn --no-build-isolation 

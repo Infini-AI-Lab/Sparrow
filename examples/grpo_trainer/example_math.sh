@@ -5,7 +5,7 @@ set -x
 export VLLM_ALLOW_INSECURE_SERIALIZATION=1 
 export RAY_TASK_ERROR_VERBOSE=1 
 
-export TMPDIR=/home/xun/yangzho6/tmp 
+export TMPDIR=${src_dir}/tmp 
 mkdir -p $TMPDIR 
 export TORCH_EXTENSIONS_DIR="${TMPDIR}/torch_extensions_${USER:-user}_${RANDOM}"
 mkdir -p "$TORCH_EXTENSIONS_DIR"
@@ -119,7 +119,6 @@ python3 -u -m verl.trainer.main_ppo \
     actor_rollout_ref.rollout.val_kwargs.do_sample=True \
     actor_rollout_ref.rollout.val_kwargs.top_p=0.7 \
     actor_rollout_ref.rollout.val_kwargs.temperature=1 \
-    actor_rollout_ref.rollout.val_dense_only=True \
     algorithm.use_kl_in_reward=False \
     trainer.critic_warmup=0 \
     trainer.logger=['console','wandb'] \
