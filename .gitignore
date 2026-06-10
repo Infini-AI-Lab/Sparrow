@@ -121,6 +121,7 @@ ENV/
 
 # local media assets
 *.mp4
+!assets/2603.08640.mp4
 *.mov
 *.webm
 *.mkv
