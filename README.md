@@ -20,7 +20,7 @@ Sparrow: <u>Spar</u>se <u>Roll</u>out for Stable and Efficient Long-context RL o
 ---
 
 <p align="center">
-  <img src="assets/figure1.png" alt="Figure 1" width="100%">
+  <video src="assets/threadone_17.mov" controls width="100%"></video>
 </p>
 
 Despite being powerful, **reinforcement learning with verifiable rewards (RLVR)** induces **extremely long
@@ -50,6 +50,10 @@ now attain the same sparse-to-dense mismatch threshold, thus achieving **higher 
 
 --- 
 ### Why Tail Statistics is a Better Metrics for Evaluating Sparse Dense Actor-Policy Mismatch than Average Statistics? 
+
+<p align="center">
+  <img src="assets/figure1.png" alt="Figure 1" width="100%">
+</p> 
 
 We observe that **sparse rollout collapse is not driven by uniform degradation across all tokens**: even under aggressive sparsity, most generated tokens stay nearly aligned with the dense policy, and the unstable signal appears only in the **small fraction of tokens where sparse and dense behavior diverge**. As shown in Figure 1(b), the **per-token mismatch distribution is highly skewed**, so the **average mismatch becomes a weak stability indicator**. For example, when training **Qwen3-1.7B with a 37K generation budget**, a **KV budget of 4096 remains stable while 2560 collapses**, yet their average per-token sparse-dense L1 distances are nearly indistinguishable (**0.977 vs. 0.968**). We therefore evaluate mismatch with **lower-tail statistics**--the **lower 5-percentile per-token L1 distance**--which targets the **worst-aligned tokens that actually drive collapse** while ignoring the many near-perfect tokens that do not. 
 
