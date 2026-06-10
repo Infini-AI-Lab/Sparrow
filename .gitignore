@@ -118,6 +118,13 @@ ENV/
 *.lock
 
 # data
+
+# local media assets
+*.mp4
+*.mov
+*.webm
+*.mkv
+*.avi
 *.parquet
 
 
