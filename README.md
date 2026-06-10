@@ -20,10 +20,6 @@ Sparrow: <u>Spar</u>se <u>Roll</u>out for Stable and Efficient Long-context RL o
 ---
 
 <p align="center">
-  <a href="assets/2603.08640.mp4">
-    <img src="assets/2603.08640.png" alt="Sparrow demo video" width="100%">
-  </a>
-  <br>
   <a href="assets/2603.08640.mp4">Watch the Sparrow demo video</a>
 </p>
 
